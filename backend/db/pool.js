@@ -1,0 +1,1 @@
+const { Pool } = require('pg');\nrequire('dotenv').config();\n\nconst pool = new Pool({\n  connectionString: process.env.DATABASE_URL,\n  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,\n});\n\npool.on('error', (err) => {\n  console.error('Unexpected error on idle client', err);\n});\n\nmodule.exports = pool;\n
